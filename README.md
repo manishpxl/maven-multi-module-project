@@ -1,64 +1,69 @@
-# Maven Multi-Module Project
+# 🧩 Maven Multi-Module Project
 
-This repository demonstrates a **Maven multi-module project structure**. It shows how to use a parent POM to manage common build and dependency configurations while organizing code into multiple submodules.
-
----
-
-## 🛠️ What is a Multi-Module Maven Project?
-
-A multi-module Maven project allows you to:
-- Share configuration and dependencies in a central parent POM
-- Structure related code across separate modules/subprojects (easy to manage, test, and reuse)
-- Build all modules together with a single command
+A simple **Maven multi-module project** that shows how to manage multiple Java modules under one parent project using a single `pom.xml` file.
 
 ---
 
-## 📂 Project Structure
-maven_parent/
-├── pom.xml # Parent POM (packaging = pom)
-├── maven_child1/
-│ ├── pom.xml # First child module
-│ └── src/
-├── maven_child2/
-│ ├── pom.xml # Second child module
-│ └── src/
-└── .gitignore
+## 📘 Overview
 
+This project demonstrates:
+- Managing multiple submodules with a single parent POM  
+- Sharing common dependencies and plugins across modules  
+- Building and testing all modules together with one command  
 
 ---
 
-## 🚀 How to Build All Modules
+## 🚀 How to Use
 
-Make sure you are in the root (`maven_parent`) folder, then run:
-mvn clean install
+### 1️⃣ Go to the main project folder
+```bash
+cd maven_parent
 
-
+### 2️⃣ Build all modules together
+   mvn clean install
 This will:
-- Build the parent and all child modules
-- Install output JARs into your local Maven repository
-- Run unit tests for all modules
 
----
+Build the parent and all child modules
 
-## 📝 Parent POM Key Elements
+Run all module tests
 
-- `<modules>` lists all child modules (folders)
-- `<dependencyManagement>` section: centralizes versions for dependencies used in children
-- Child modules inherit configuration by having `<parent>` in their POM
+Install generated JARs into your local Maven repository
+3️⃣ Run a specific module
+cd maven_child1
+mvn exec:java -Dexec.mainClass="com.parent.child1.MainApp"
 
----
+⚙️ Parent POM Highlights
 
-## 🗂️ Example: Adding a Child Module Dependency
+The parent POM (pom.xml) manages:
 
-If `maven_child2` needs to use code from `maven_child1`, add this to `maven_child2/pom.xml`:
+Common dependencies and plugins
 
-<dependency> <groupId>com.parent</groupId> <artifactId>maven_child1</artifactId> <version>1.0-SNAPSHOT</version> </dependency> ```
+Version control for all modules
 
-📚 Resources
-Baeldung - Maven Multi-Module Project
+Centralized configuration
 
-Maven Official Docs
-✍️ Credits
-Created by manishpxl for learning and demonstration purposes.
+Example:
 
-Feel free to fork or use as a template for your own Java multi-module builds!
+<modules>
+    <module>maven_child1</module>
+    <module>maven_child2</module>
+</modules>
+
+
+All child modules automatically inherit these settings using the <parent> tag in their POM files.
+
+💡 Why Use a Multi-Module Project?
+
+Organize large codebases into smaller modules
+
+Reuse code between projects
+
+Manage dependencies efficiently
+
+Build everything with one command
+
+📚 Useful Resources
+
+Maven Official Documentation
+
+Baeldung – Maven Multi-Module Tutorial
